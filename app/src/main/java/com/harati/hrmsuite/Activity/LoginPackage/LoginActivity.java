@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.harati.hrmsuite.Activity.MainPackage.MainActivity;
+import com.harati.hrmsuite.LoginPackage.LoginModel.LoginModel;
 import com.harati.hrmsuite.Retrofit.Interface.ApiInterface;
 import com.harati.hrmsuite.Retrofit.RetrofiltClient.LoginRetrofitClient;
-import com.harati.hrmsuite.Activity.LoginPackage.LoginModel.LoginModel;
 import com.harati.hrmsuite.R;
 
 import retrofit2.Call;

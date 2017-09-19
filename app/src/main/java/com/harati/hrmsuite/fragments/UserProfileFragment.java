@@ -23,7 +23,7 @@ public class UserProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_profie, container, false);
         userSessionManager= new UserSessionManager(getContext());
-        logOut= (ImageView)view.findViewById(R.id.logOut);
+        logOut= (ImageView)view.findViewById(R.id.setting);
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
