@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "502856716567",
+    "firebase_url": "https://hrmsuite-59f80.firebaseio.com",
+    "project_id": "hrmsuite-59f80",
+    "storage_bucket": "hrmsuite-59f80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502856716567:android:a1b04bbd127391fd",
+        "android_client_info": {
+          "package_name": "com.harati.hrmsuite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502856716567-9564mgl0qv0f9g6em7p58dunbq1t8h37.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ4bhrQd4rdHXBXV_IJMulK57gA_N2ezE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

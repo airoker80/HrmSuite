@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E8E9E9">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <RelativeLayout
+            android:padding="@dimen/_4sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.harati.hrmsuite.Helper.CustomTextView
+                android:id="@+id/dateFomTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_toLeftOf="@+id/viewALL"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:textColor="#2295B2"
+                android:textSize="@dimen/_12sdp" />
+            <com.harati.hrmsuite.Helper.CustomTextView
+                android:id="@+id/viewALL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:layout_alignParentRight="true"
+                android:drawableRight="@drawable/ic_next"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:textColor="@drawable/text_selector_new"
+                android:textSize="@dimen/_14sdp" />
+            <View
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_below="@+id/viewALL"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D7D6D6"/>
+        </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/logs_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_8sdp"></android.support.v7.widget.RecyclerView>
+
+            <com.harati.hrmsuite.Helper.CustomTextView
+                android:visibility="gone"
+                android:id="@+id/emptyMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No data Available"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:textColor="#2295B2"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:textSize="@dimen/_18sdp" />
+        </LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

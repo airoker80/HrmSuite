@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Leave">
+        <item>Causual Leave (20.0)</item>
+        <item>Maternity Leave (52.0)</item>
+        <item>Mourn Leave (13.0)</item>
+        <item>Official Trip (180.0)</item>
+        <item>Paid Leave (24.0)</item>
+        <item>Sick Leave (15.0)</item>
+        <item>Substitude Holiday (20.0)</item>
+    </string-array>
+</resources>

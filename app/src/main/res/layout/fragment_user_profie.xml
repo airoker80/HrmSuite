@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1.2"
+                android:background="@color/colorPrimary">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/refresh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/setting"
+                        android:clickable="true"
+                        android:padding="@dimen/_8sdp"
+                        android:src="@drawable/ic_refresh"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/setting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:padding="@dimen/_8sdp"
+                        android:src="@drawable/ic_settings" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circleImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_below="@+id/setting"
+                        android:scaleType="centerCrop"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="@dimen/_2sdp" />
+
+                    <com.harati.hrmsuite.Helper.CustomTextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/circleImageView"
+                        android:layout_marginTop="@dimen/_14sdp"
+                        android:gravity="center"
+                        android:text="Unnamed "
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18sdp" />
+                    <com.harati.hrmsuite.Helper.CustomTextViewBold
+                        android:id="@+id/lastName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/name"
+                        android:layout_below="@+id/circleImageView"
+                        android:layout_marginTop="@dimen/_14sdp"
+                        android:gravity="center"
+                        android:text="asdasd "
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18sdp" />
+
+                    <com.harati.hrmsuite.Helper.CustomTextView
+                        android:id="@+id/companyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:gravity="center"
+                        android:text="Harati Computer Service"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp" />
+                </RelativeLayout>
+
+
+            </FrameLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#cccccc"
+                        android:orientation="vertical">
+
+                        <com.harati.hrmsuite.Helper.CustomTextViewBold
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_10sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:text="General Information"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:textColor="@color/colorGrey" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.harati.hrmsuite.Helper.CustomTextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingLeft="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Gender"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:id="@+id/gender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/_4sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.harati.hrmsuite.Helper.CustomTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date of Birth"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingLeft="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:id="@+id/dob"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/_4sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.harati.hrmsuite.Helper.CustomTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingLeft="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Phone"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:id="@+id/phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/_4sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.harati.hrmsuite.Helper.CustomTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingLeft="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Permanent Address"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:id="@+id/permanent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.harati.hrmsuite.Helper.CustomTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingLeft="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Temoprary Address"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:id="@+id/temporary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/_4sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.harati.hrmsuite.Helper.CustomTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingLeft="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Temporary Address Type"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:id="@+id/temporaryAddType"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/_4sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#cccccc"
+                            android:orientation="vertical">
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/_10sdp"
+                                android:textSize="@dimen/_12sdp"
+                                android:text="More Details"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:textColor="@color/colorGrey"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.harati.hrmsuite.Helper.CustomTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingLeft="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="CitizenShip Number"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:id="@+id/citizen"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/_4sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.harati.hrmsuite.Helper.CustomTextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:paddingLeft="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Driving Liscence Number"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <com.harati.hrmsuite.Helper.CustomTextViewBold
+                                android:id="@+id/driving"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/_4sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </ScrollView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

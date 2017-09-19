@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/quick_board"
+        android:title="Dashboard"
+        android:icon="@drawable/ic_quickboard"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/plan_and_package"
+        android:title="Leave"
+        android:icon="@drawable/ic_graph_transparent"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/product_and_services"
+        android:title="CheckIn/Out"
+        android:icon="@drawable/ic_check_in_out"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/user_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_dots"
+        app:showAsAction="ifRoom" />
+</menu>

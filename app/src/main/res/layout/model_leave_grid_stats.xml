@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="@dimen/_83sdp"
+        android:layout_height="@dimen/_88sdp"
+        android:layout_margin="@dimen/_8sdp"
+        android:background="@drawable/shape_leave_drawable"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/leaveProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_6sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:progressDrawable="@drawable/shape_progress" />
+        <!--android:background="@drawable/shape_progressbar"-->
+        <com.harati.hrmsuite.Helper.CustomTextView
+            android:id="@+id/leaveTypeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="Causal Leave"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8sdp" />
+
+        <com.harati.hrmsuite.Helper.CustomTextView
+            android:id="@+id/leavesTaken"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="0/52"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp" />
+
+    </LinearLayout>
+</LinearLayout>
