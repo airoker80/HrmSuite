@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.harati.hrmsuite.Helper.NetworkManager;
+import com.harati.hrmsuite.Helper.ProgressHelper;
 import com.harati.hrmsuite.Helper.ResponseModel;
 import com.harati.hrmsuite.R;
 import com.harati.hrmsuite.Retrofit.Interface.ApiInterface;
@@ -31,10 +32,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     CoordinatorLayout coordinatorLayout;
     UserSessionManager userSessionManager;
     private ApiInterface apiInterface;
+    ProgressHelper progressHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        progressHelper = new ProgressHelper(ChangePasswordActivity.this);
         setContentView(R.layout.activity_change_password);
         getSupportActionBar().setTitle("Change Password");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -101,10 +104,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
     public void processReset(final String oldPassword, final String newPassword) {
         if(NetworkManager.isConnected(getApplicationContext())) {
+            progressHelper.showProgressDialog("Changing your Password");
             Call<ResponseModel> call = apiInterface.updatePassword(userSessionManager.getKeyUsercode(),userSessionManager.getKeyAccessToken(),oldPassword,newPassword);
             call.enqueue(new Callback<ResponseModel>() {
                 @Override
                 public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                    progressHelper.hideProgressDialog();
                     if(response.isSuccessful()){
                     if (response.body().getMsgTitle().equals("Success")) {
                         progress.setVisibility(View.GONE);
@@ -133,6 +138,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
                 @Override
                 public void onFailure(Call<ResponseModel> call, Throwable t) {
+                    progressHelper.hideProgressDialog();
                     progress.setVisibility(View.GONE);
                     updatePassword.setVisibility(View.VISIBLE);
                     oldPasswordEdit.setText("");

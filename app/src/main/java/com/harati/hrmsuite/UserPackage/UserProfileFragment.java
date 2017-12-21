@@ -65,6 +65,8 @@ public class UserProfileFragment extends Fragment {
     private RadioGroup radioLanguage;
     DateConverter dateConverter;
 
+    public UserProfileFragment() {
+    }
 
     @Nullable
     @Override
@@ -232,13 +234,17 @@ public class UserProfileFragment extends Fragment {
 
             name.setText(userData.getFirstname() + " " + userData.getLastname());
             companyName.setText(userData.getCompanyName());
-            Picasso.with(getActivity())
-                    .load(userData.getPhotoUrl())
-                    .resize(200, 200)
-                    .centerCrop()
-                    .placeholder(R.mipmap.ic_default)
-                    .error(R.mipmap.ic_default)
-                    .into(circleImageView);
+            try {
+                Picasso.with(getContext())
+                        .load(userData.getPhotoUrl())
+                        .resize(200, 200)
+                        .centerCrop()
+                        .placeholder(R.mipmap.ic_default)
+                        .error(R.mipmap.ic_default)
+                        .into(circleImageView);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
 

@@ -1,5 +1,7 @@
 package com.harati.hrmsuite.DailyLogsPackage.ViewLogsPackage;
 
+import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -7,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -128,6 +132,7 @@ public class ViewDailyLogsActivity extends AppCompatActivity {
     }
 
     public void getDailyLogsFromServer() {
+//        showProgressDialog("Retriving Logs");
         //swipeRefreshLayout.setRefreshing(true);
         emptyMsg.setVisibility(View.VISIBLE);
         emptyMsg.setText("Searching Data..");
@@ -139,6 +144,7 @@ public class ViewDailyLogsActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<DailyLogsDetailModel> call, Response<DailyLogsDetailModel> response) {
                     if(response.isSuccessful()){
+//                        hideProgressDialog();
                     loading = false;
                     Log.d("res----", response.body().getMsgTitle() + "");
                     if (response.body().getMsgTitle().equals("Success")) {
@@ -206,6 +212,7 @@ public class ViewDailyLogsActivity extends AppCompatActivity {
                     }
                     }
                     else {
+//                        hideProgressDialog();
                         Snackbar snackbar = Snackbar.make(coordinatorLayout, "Error in server end", Snackbar.LENGTH_SHORT);
                         snackbar.show();
                         totalLogsCount = databaseHandler.getAllLogsCount();
@@ -215,6 +222,7 @@ public class ViewDailyLogsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<DailyLogsDetailModel> call, Throwable t) {
+//                    hideProgressDialog();
                     loading = false;
                     //swipeRefreshLayout.setRefreshing(false);
                     Snackbar snackbar = Snackbar.make(coordinatorLayout, "Error in connection..", Snackbar.LENGTH_SHORT);
@@ -227,6 +235,7 @@ public class ViewDailyLogsActivity extends AppCompatActivity {
 
             });
         } else {
+//            hideProgressDialog();
             //swipeRefreshLayout.setRefreshing(false);
             Snackbar snackbar = Snackbar.make(coordinatorLayout, "Error in connection..", Snackbar.LENGTH_SHORT);
             snackbar.show();
@@ -316,5 +325,31 @@ public class ViewDailyLogsActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    private static ProgressDialog progress;
+    public void showProgressDialog(String message) {
+
+        Log.i("","showProgressDialog");
+        progress = new ProgressDialog(ViewDailyLogsActivity.this);
+        if(!progress.isShowing()){
+            SpannableString titleMsg= new SpannableString("Processing");
+            titleMsg.setSpan(new ForegroundColorSpan(Color.BLACK),0,titleMsg.length(),0);
+            progress.setTitle(titleMsg);
+            progress.setMessage(message);
+            progress.setCancelable(false);
+            progress.setIndeterminate(true);
+            progress.show();
+        }
+    }
+
+    public void hideProgressDialog() {
+        Log.i("","hideProgressDialog");
+        if(progress !=null){
+            if(progress.isShowing()){
+                progress.dismiss();
+            }
+        }
+
     }
 }

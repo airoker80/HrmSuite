@@ -25,38 +25,48 @@ import retrofit2.http.Query;
 public interface ApiInterface {
     @GET("login")
     Call<LoginModel> authenticate(@Query("username") String username, @Query("password") String password);
+
     @FormUrlEncoded
     @POST("forgotPassword")
     Call<ResponseModel> reset(@Field("email") String email);
+
     @FormUrlEncoded
     @POST("updatePassword")
-    Call<ResponseModel> updatePassword(@Field("userCode") String userCode, @Field("access_token") String access_token,@Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
+    Call<ResponseModel> updatePassword(@Field("userCode") String userCode, @Field("access_token") String access_token, @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
+
     @GET("getDailyLogs")
     Call<DailyLogsDetailModel> getDailyLogs(@Query("userCode") String userCode, @Query("access_token") String access_token,
                                             @Query("dataLength") String dataLength, @Query("startLength") String startLength);
+
     @GET("getLeaveDetails")
     Call<LeaveStatisticModel> getLeaveDetailsStatus(@Query("userCode") String userCode, @Query("access_token") String access_token,
-                                                     @Query("leaveDetails") String leaveDetails);
+                                                    @Query("leaveDetails") String leaveDetails);
+
     @GET("getLeaveDetails")
     Call<LeaveModel> getAppliedLeaveDetails(@Query("userCode") String userCode, @Query("access_token") String access_token,
-                                                      @Query("leaveDetails") String leaveDetails);
+                                            @Query("leaveDetails") String leaveDetails);
+
     @GET("getUserDetails")
     Call<UserModel> getUserDetails(@Query("userCode") String userCode, @Query("access_token") String access_token);
+
     @GET("getAttendenceForgotList")
     Call<CheckInModel> getAttendenceForgotList(@Query("userCode") String userCode, @Query("access_token") String access_token);
 
     @GET("getUpcomingHoliday")
     Call<HolidayModel> getUpcomingHoliday(@Query("userCode") String userCode, @Query("access_token") String access_token);
+
     @FormUrlEncoded
     @POST("saveAttendanceForgot")
     Call<ResponseModel> saveAttendanceForgot(@Field("userCode") String userCode, @Field("access_token") String access_token
             , @Field("reason") String reason, @Field("forgotCheckInOutDate") String forgotCheckInOutDate
             , @Field("checkType") String checkType, @Field("time") String time);
+
     @FormUrlEncoded
     @POST("saveLeaveApplication")
-    Call<ResponseModel> saveLeaveApplication(@Field("userCode") String userCode, @Field("access_token") String access_token
+    Call<ResponseModel>  saveLeaveApplication(@Field("userCode") String userCode, @Field("access_token") String access_token
             , @Field("reason") String reason, @Field("leaveStartDate") String leaveStartDate
             , @Field("leaveEndDate") String leaveEndDate, @Field("leaveId") String leaveId, @Field("leaveType") String leaveType);
+
     @FormUrlEncoded
     @POST("saveFirebaseToken")
     Call<ResponseModel> saveFirebaseToken(@Field("userCode") String userCode, @Field("access_token") String access_token
@@ -64,8 +74,8 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("saveRemark")
-    Call<ResponseModel> saveRemark(@Query("userCode") String userCode, @Query("access_token") String access_token,@Field("remarkDate") String remarkDate,
-                                   @Field("reason") String reason,@Field("notLate") String notLate,@Field("notEarly") String notEarly);
+    Call<ResponseModel> saveRemark(@Query("userCode") String userCode, @Query("access_token") String access_token, @Field("remarkDate") String remarkDate,
+                                   @Field("reason") String reason, @Field("notLate") String notLate, @Field("notEarly") String notEarly);
 
     @GET("getRemark")
     Call<RemarkModel> getRemark(@Query("userCode") String userCode, @Query("access_token") String access_token);

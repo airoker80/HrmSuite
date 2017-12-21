@@ -16,10 +16,11 @@ import com.harati.hrmsuite.UserSessionManager.UserSessionManager;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
     Intent in;
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        showNotification(remoteMessage.getNotification().getBody(),remoteMessage.getNotification().getTitle());
+        showNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
     }
 
     private void showNotification(String message, String title) {
@@ -36,7 +37,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setAutoCancel(true)
-                .setContentTitle("HRMSuite- "+ title)
+                .setContentTitle("HRMSuite- " + title)
                 .setContentText(message)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setSound(defaultSoundUri)
@@ -46,8 +47,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         manager.notify((int) System.currentTimeMillis(), builder.build());
     }
+
     public boolean getLoginStatus() {
-        UserSessionManager userSessionManager= new UserSessionManager(getApplicationContext());
+        UserSessionManager userSessionManager = new UserSessionManager(getApplicationContext());
         return userSessionManager.isUserLoggedIn();
     }
 

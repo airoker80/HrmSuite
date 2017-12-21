@@ -18,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.harati.hrmsuite.Helper.ProgressHelper;
 import com.hornet.dateconverter.DatePicker.DatePickerDialog;
 import com.harati.hrmsuite.Helper.DatabaseHandler;
 import com.harati.hrmsuite.Helper.DatePickerAllFragment;
@@ -62,12 +63,15 @@ public class RemarkFragment extends Fragment implements View.OnClickListener, Da
     List<RemarkModel.RemarkData> remarkDataList = new ArrayList<RemarkModel.RemarkData>();
     private DateConverter dateConverter;
 
+    ProgressHelper progressHelper;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_remark, container, false);
         apiInterface = RetrofitClient.getApiService();
+        progressHelper = new ProgressHelper(getContext());
         dateConverter= new DateConverter();
         userSessionManager = new UserSessionManager(getContext());
         databaseHandler = DatabaseHandler.getInstance(getContext());
@@ -86,6 +90,7 @@ public class RemarkFragment extends Fragment implements View.OnClickListener, Da
         remarkRecyclerView.setLayoutManager(linearLayoutManager);
         remarkDateEdt.setOnClickListener(this);
         submitRemark.setOnClickListener(this);
+
 
         return view;
     }
@@ -197,11 +202,13 @@ public class RemarkFragment extends Fragment implements View.OnClickListener, Da
             reasonEdt.requestFocus();
         } else {
             if (NetworkManager.isConnected(getContext())) {
+                progressHelper.showProgressDialog("Send data to server");
                 Call<ResponseModel> call = apiInterface.saveRemark(userSessionManager.getKeyUsercode(), userSessionManager.getKeyAccessToken(),
                         remarkDateSend, reason, notLate, notEarly);
                 call.enqueue(new Callback<ResponseModel>() {
                     @Override
                     public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                        progressHelper.hideProgressDialog();
                         if(response.isSuccessful()) {
                             if (response.body().getMsgTitle().equals("Success")) {
                                 Snackbar snackbar = Snackbar.make(((MainActivity) getActivity()).mainView, response.body().getMsg(), Snackbar.LENGTH_SHORT);
@@ -224,6 +231,7 @@ public class RemarkFragment extends Fragment implements View.OnClickListener, Da
 
                     @Override
                     public void onFailure(Call<ResponseModel> call, Throwable t) {
+                        progressHelper.hideProgressDialog();
                         Snackbar snackbar = Snackbar.make(((MainActivity) getActivity()).mainView, "Error in connection..", Snackbar.LENGTH_SHORT);
                         snackbar.show();
                         prepareData();

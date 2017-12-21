@@ -1,6 +1,7 @@
 package com.harati.hrmsuite.DashBoardSlidingPackage;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,13 +131,14 @@ public class DashboardSlidingFragment extends Fragment {
     }
 
     public void getCheckInOutDetails() {
-
+        showProgressDialog("Retriving Data");
         if (NetworkManager.isConnected(getContext())) {
             Call<HolidayModel> call = apiInterface.getUpcomingHoliday(userSessionManager.getKeyUsercode(), userSessionManager.getKeyAccessToken());
             call.enqueue(new Callback<HolidayModel>() {
                 @Override
                 public void onResponse(Call<HolidayModel> call, Response<HolidayModel> response) {
                     if (response.isSuccessful()) {
+                        hideProgressDialog();
                         if (response.body().getMsgTitle().equals("Success")) {
                             Log.d("res11111111----", response.body().getData().toString());
                             databaseHandler.deleteHoliday();
@@ -228,5 +232,31 @@ public class DashboardSlidingFragment extends Fragment {
         }
 
         return fulldate;
+    }
+
+    private static ProgressDialog progress;
+    public void showProgressDialog(String message) {
+
+        Log.i("","showProgressDialog");
+        progress = new ProgressDialog(getContext());
+        if(!progress.isShowing()){
+            SpannableString titleMsg= new SpannableString("Processing");
+            titleMsg.setSpan(new ForegroundColorSpan(Color.BLACK),0,titleMsg.length(),0);
+            progress.setTitle(titleMsg);
+            progress.setMessage(message);
+            progress.setCancelable(false);
+            progress.setIndeterminate(true);
+            progress.show();
+        }
+    }
+
+    public void hideProgressDialog() {
+        Log.i("","hideProgressDialog");
+        if(progress !=null){
+            if(progress.isShowing()){
+                progress.dismiss();
+            }
+        }
+
     }
 }

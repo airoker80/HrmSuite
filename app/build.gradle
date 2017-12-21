@@ -1,8 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+    }
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.harati.hrmsuite"
         minSdkVersion 15

@@ -10,7 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class LoginRetrofitClient {
-    private static final String ROOT_URL = "http://192.168.1.163:8080/pms/api/v1/androidApp/";
+    private static final String ROOT_URL = "http://192.168.1.138:8080/pms/api/v1/androidApp/";
+//    private static final String ROOT_URL = "http://192.168.1.163:8080/pms/api/v1/androidApp/";
 
     /**
      * Get Retrofit Instance

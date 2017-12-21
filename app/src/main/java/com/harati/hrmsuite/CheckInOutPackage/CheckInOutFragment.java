@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.harati.hrmsuite.Helper.ProgressHelper;
 import com.hornet.dateconverter.DatePicker.DatePickerDialog;
 import com.hornet.dateconverter.TimePicker.RadialPickerLayout;
 import com.hornet.dateconverter.TimePicker.TimePickerDialog;
@@ -64,13 +65,14 @@ public class CheckInOutFragment extends Fragment implements View.OnClickListener
     UserSessionManager userSessionManager;
     DatabaseHandler databaseHandler;
     private DateConverter dateConverter;
+    ProgressHelper progressHelper;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_check_in_out, container, false);
-
+        progressHelper = new ProgressHelper(getContext());
         dateConverter = new DateConverter();
         apiInterface = RetrofitClient.getApiService();
         userSessionManager = new UserSessionManager(getContext());
@@ -295,11 +297,13 @@ public class CheckInOutFragment extends Fragment implements View.OnClickListener
             Log.d("data", timeSend + "-" + dateSend + "-" + reasonSend + "-" + checkType);
 
             if (NetworkManager.isConnected(getContext())) {
+                progressHelper.showProgressDialog("Sending Data to server");
                 Call<ResponseModel> call = apiInterface.saveAttendanceForgot(userSessionManager.getKeyUsercode(), userSessionManager.getKeyAccessToken(), reasonSend,
                         dateSendToServer, checkType, timeSend);
                 call.enqueue(new Callback<ResponseModel>() {
                     @Override
                     public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                        progressHelper.hideProgressDialog();
                         if (response.isSuccessful()) {
                             if (response.body().getMsgTitle().equals("Success")) {
                                 Snackbar snackbar = Snackbar.make(((MainActivity) getActivity()).mainView, response.body().getMsg(), Snackbar.LENGTH_SHORT);
@@ -320,6 +324,7 @@ public class CheckInOutFragment extends Fragment implements View.OnClickListener
 
                     @Override
                     public void onFailure(Call<ResponseModel> call, Throwable t) {
+                        progressHelper.hideProgressDialog();
                         Snackbar snackbar = Snackbar.make(((MainActivity) getActivity()).mainView, "Error in connection..", Snackbar.LENGTH_SHORT);
                         snackbar.show();
                     }

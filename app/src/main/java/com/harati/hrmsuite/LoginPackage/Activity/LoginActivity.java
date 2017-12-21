@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.harati.hrmsuite.ForgotPasswordPackage.PasswordRecoveryActivity;
@@ -202,8 +203,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 public void onFailure(Call<LoginModel> call, Throwable t) {
                     progress.setVisibility(View.GONE);
                     hrm_login_btn.setVisibility(View.VISIBLE);
-                    Snackbar snackbar = Snackbar.make(progress, t.getMessage().toString(), Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(progress, t.getMessage(), Snackbar.LENGTH_SHORT);
                     snackbar.show();
+//                    Toast.makeText(LoginActivity.this,  t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    try {
+                        Log.d("",t.getMessage());
+                    }catch (Exception e){
+//                        Log.d("",t.getMessage());
+                        e.printStackTrace();
+                    }
                 }
             });
         } else {

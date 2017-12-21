@@ -1,5 +1,6 @@
 package com.harati.hrmsuite.AppliedLeavePackage;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +19,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.harati.hrmsuite.DailyLogsPackage.LeaveStatisticPackage.LeaveStatisticModel;
 import com.harati.hrmsuite.Helper.DatabaseHandler;
@@ -139,7 +144,20 @@ public class AppliedLeaveFragment extends Fragment implements View.OnClickListen
 
                 break;
             case R.id.addLeave:
-                sendToServer();
+                Boolean result = false;
+                try {
+                    result = verifyDateSearch(from.getText()
+                            .toString(), to.getText().toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                if (result){
+                    sendToServer();
+                }else {
+                    Toast.makeText(getContext(), "From date must be less than to date", Toast.LENGTH_SHORT).show();
+                }
+
 
                 break;
         }
@@ -274,6 +292,8 @@ public class AppliedLeaveFragment extends Fragment implements View.OnClickListen
     }
 
     public void sendToServer() {
+
+        Log.e("leavesd" , "Log.e(\"leavesd\" , leaveStartDateSend + \"\" + leaveEndDateSend);" );
         String[] split = applyLeaveType.getSelectedItem().toString().split("-");
 
         final String leaveName = split[0];
@@ -298,15 +318,21 @@ public class AppliedLeaveFragment extends Fragment implements View.OnClickListen
         }
         final String reasonSend = reason.getText().toString().trim();
 
+        Log.e("leavesd" , leaveStartDateSend + "===" + leaveEndDateSend);
+//        Log.e("leavesd" , leaveStartDateSend + "===" + leaveEndDateSend);
         if (leaveStartDateSend.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})") && leaveEndDateSend.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})") && !reasonSend.isEmpty() && !lvType.isEmpty() && !applyLeaveType.getSelectedItem().toString().isEmpty()) {
             final String leaveId = databaseHandler.getLeaveId(leaveName);
 
+            Log.e("leavename",leaveId);
+
             if (NetworkManager.isConnected(getContext())) {
+                showProgressDialog("Sending Data to Server");
                 Call<ResponseModel> call = apiInterface.saveLeaveApplication(userSessionManager.getKeyUsercode(), userSessionManager.getKeyAccessToken(), reasonSend,
                         leaveStartDateSend, leaveEndDateSend, leaveId, lvType);
                 call.enqueue(new Callback<ResponseModel>() {
                     @Override
                     public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                        hideProgressDialog();
                         if(response.isSuccessful()) {
                             if (response.body().getMsgTitle().equals("Success")) {
                                 Snackbar snackbar = Snackbar.make(((MainActivity) getActivity()).mainView, response.body().getMsg(), Snackbar.LENGTH_SHORT);
@@ -327,6 +353,7 @@ public class AppliedLeaveFragment extends Fragment implements View.OnClickListen
 
                     @Override
                     public void onFailure(Call<ResponseModel> call, Throwable t) {
+                        hideProgressDialog();
                         Snackbar snackbar = Snackbar.make(((MainActivity) getActivity()).mainView, "Error in connection..", Snackbar.LENGTH_SHORT);
                         snackbar.show();
                     }
@@ -416,9 +443,66 @@ public class AppliedLeaveFragment extends Fragment implements View.OnClickListen
         else
             day = String.valueOf(engDate.getDay());
 
+        if (month.length() ==3){
+            if(String.valueOf(month.charAt(0)).equals("0")){
+                Log.e("worng","wrong  " +month.substring(1));
+                month = month.substring(1);
+            }
+        }
+
 
         fullDate = year + "-" + month + "-" + day;
+
+        Log.e("checkdate","===+"+month);
         return fullDate;
     }
 
+ProgressDialog progress ;
+    public void showProgressDialog(String message) {
+
+        Log.i("","showProgressDialog");
+        progress = new ProgressDialog(getContext());
+        if(!progress.isShowing()){
+            SpannableString titleMsg= new SpannableString("Processing");
+            titleMsg.setSpan(new ForegroundColorSpan(Color.BLACK),0,titleMsg.length(),0);
+            progress.setTitle(titleMsg);
+            progress.setMessage(message);
+            progress.setCancelable(false);
+            progress.setIndeterminate(true);
+            progress.show();
+        }
+    }
+
+    public void hideProgressDialog() {
+        Log.i("","hideProgressDialog");
+        if(progress !=null){
+            if(progress.isShowing()){
+                progress.dismiss();
+            }
+        }
+
+    }
+
+    private Boolean verifyDateSearch(String dateFromText, String dateToText)
+            throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date fromDate = sdf.parse(dateFromText);
+        Date toDate = sdf.parse(dateToText);
+        Boolean returnValue = false;
+        if (fromDate.compareTo(toDate) > 0) {
+            // userDeviceDetails.showToast("Date1 is after Date2");
+            returnValue = false;
+        } else if (fromDate.compareTo(toDate) < 0) {
+            returnValue = true;
+            // userDeviceDetails.showToast("Date1 is before Date2");
+        } else if (fromDate.compareTo(toDate) == 0) {
+            returnValue = true;
+            // userDeviceDetails.showToast("Date1 is equal to Date2");
+        } else {
+            returnValue = false;
+            // userDeviceDetails.showToast("How to get here?");
+        }
+
+        return returnValue;
+    }
 }
