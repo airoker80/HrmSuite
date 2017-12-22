@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.harati.hrmsuite.Activity.Register.RegisterActivity;
 import com.harati.hrmsuite.ForgotPasswordPackage.PasswordRecoveryActivity;
 import com.harati.hrmsuite.Helper.NetworkManager;
 import com.harati.hrmsuite.Helper.ResponseModel;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ApiInterface apiInterface;
     UserSessionManager userSessionManager;
     ProgressBar progress;
-    TextView resetPassword;
+    TextView resetPassword, registerUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,12 +59,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password = (TextInputLayout) findViewById(R.id.password);
         progress = (ProgressBar) findViewById(R.id.progressBar);
         resetPassword = (TextView) findViewById(R.id.resetPassword);
+        registerUser = (TextView) findViewById(R.id.registerUser);
         Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "Lato-Light.ttf");
         hrm_username.setTypeface(typeface);
         hrm_password.setTypeface(typeface);
         hrm_login_btn.setTypeface(typeface);
         hrm_login_btn.setOnClickListener(this);
         resetPassword.setOnClickListener(this);
+        registerUser.setOnClickListener(this);
         if (userSessionManager.isUserLoggedIn()) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.putExtra("title", "");
@@ -117,6 +120,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.resetPassword:
                 startActivity(new Intent(LoginActivity.this, PasswordRecoveryActivity.class));
+                break;
+            case R.id.registerUser:
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
         }
 
@@ -179,7 +185,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                             });
                             thread.start();
-                            Intent intent= new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("title", "");
                             startActivity(intent);
                             finish();
@@ -207,8 +213,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     snackbar.show();
 //                    Toast.makeText(LoginActivity.this,  t.getMessage().toString(), Toast.LENGTH_SHORT).show();
                     try {
-                        Log.d("",t.getMessage());
-                    }catch (Exception e){
+                        Log.d("", t.getMessage());
+                    } catch (Exception e) {
 //                        Log.d("",t.getMessage());
                         e.printStackTrace();
                     }

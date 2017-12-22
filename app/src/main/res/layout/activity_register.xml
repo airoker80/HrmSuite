@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="LOGIN"
+                    android:text="REGISTER"
                     android:textAlignment="center"
                     android:textColor="#262525"
                     android:textSize="@dimen/_22sdp"
@@ -54,7 +54,7 @@
                     android:layout_marginTop="@dimen/_20sdp">
 
                     <EditText
-                        android:id="@+id/hrm_username"
+                        android:id="@+id/hrm_username_signup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#000000"
@@ -72,7 +72,7 @@
                     android:layout_height="@dimen/_70sdp">
 
                     <EditText
-                        android:id="@+id/hrm_password"
+                        android:id="@+id/hrm_password_signup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#000000"
@@ -83,48 +83,58 @@
                         android:textColorHint="#000000"
                         android:textSize="@dimen/_16sdp" />
                 </android.support.design.widget.TextInputLayout>
+
+                <RadioGroup
+                    android:id="@+id/register_option_rg"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/company_rb"
+                        android:checked="true"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Company"/>
+                    <RadioButton
+                        android:id="@+id/user_rb"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="User"/>
+                </RadioGroup>
                 <RelativeLayout
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="@dimen/_8sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <ProgressBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/progressBar"
-                    android:layout_centerHorizontal="true"
-                    android:visibility="gone"/>
-                <Button
-                    android:id="@+id/hrm_login_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_selector"
-                    android:text="Login"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_16sdp" />
-                    </RelativeLayout>
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/progressBar"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="gone"/>
+                    <Button
+                        android:id="@+id/hrm_register_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_selector"
+                        android:text="Sign Up"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sdp" />
+                </RelativeLayout>
 
                 <com.harati.hrmsuite.Helper.CustomTextViewBold
-                    android:id="@+id/resetPassword"
-                    android:layout_marginTop="@dimen/_4sdp"
+                    android:id="@+id/loginUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/forgotPassword"
-                    android:textAlignment="center"
-                    android:textColor="@drawable/text_selector"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"/>
-                <com.harati.hrmsuite.Helper.CustomTextViewBold
-                    android:id="@+id/registerUser"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/signup"
+                    android:text="@string/login"
                     android:textAlignment="center"
                     android:textColor="@drawable/text_selector"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"/>
+                    android:textSize="@dimen/_14sdp" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
